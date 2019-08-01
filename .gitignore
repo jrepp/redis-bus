@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Swap / temp files
+*.swp
+*.swo
+
 # C extensions
 *.so
 
