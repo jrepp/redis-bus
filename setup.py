@@ -1,13 +1,20 @@
+import os
+import inspect
+
 from setuptools import find_packages, setup
 
+def local_path():
+    filename = os.path.abspath(inspect.getfile(inspect.currentframe()))
+    local_path = os.path.dirname(filename)
+    return local_path
 
 def readme():
-    with open('README.md') as f:
+    with open(os.path.join(local_path(), 'README.md')) as f:
         return f.read()
 
 
 def requirements():
-    with open('requirements.txt') as f:
+    with open(os.path.join(local_path(), 'requirements.txt')) as f:
         return f.read().splitlines()
 
 
