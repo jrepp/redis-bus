@@ -3,6 +3,10 @@ import inspect
 
 from setuptools import find_packages, setup
 
+LONG_DESC = """Components including worker scripts, stateless clients \
+or a command line tool use redis to share messages reliably""" 
+
+
 def local_path():
     filename = os.path.abspath(inspect.getfile(inspect.currentframe()))
     local_path = os.path.dirname(filename)
@@ -14,14 +18,13 @@ def readme():
 
 
 def requirements():
-    with open(os.path.join(local_path(), 'requirements.txt')) as f:
-        return f.read().splitlines()
+    return ['redis'] 
 
 
 setup(
     name='redisbus',
-    description='Minimal Redis based message bus model in Python.',
-    long_description=readme(),
+    description='Simple message bus component library',
+    long_description=LONG_DESC,
     keywords='redis message bus worker',
     url='https://github.com/jrepp/redisbus',
     license='MIT',
