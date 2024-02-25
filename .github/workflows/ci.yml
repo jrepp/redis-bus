@@ -11,7 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.10", "pypy3.9", "graalpy-22.3"]
+        python-version: [
+            "3.7.17",
+            "3.8.18",
+            "3.10.13",
+            "3.13.0-alpha.4",
+            "pypy3.9",
+            "graalpy-22.3" ]
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
