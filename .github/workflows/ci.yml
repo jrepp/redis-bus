@@ -10,6 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      REDIS_HOSTNAME: 'redis'
+
     # Service containers to run with `build`
     services:
       # Label used to access the service container

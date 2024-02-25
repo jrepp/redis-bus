@@ -3,7 +3,6 @@
 import sys
 import unittest
 import os
-import inspect
 import re
 
 from optparse import OptionParser
@@ -12,12 +11,13 @@ from optparse import OptionParser
 # Fix up import path if running directly
 #
 if __name__ == '__main__':
-    filename = os.path.abspath(inspect.getfile(inspect.currentframe()))
+    filename = os.path.abspath(__file__)
     thispath = os.path.dirname(filename)
     normpath = os.path.normpath(os.path.join(thispath, os.pardir))
     sys.path.insert(0, normpath)
 
 import test_basics
+
 
 def run():
     parser = OptionParser()
@@ -29,7 +29,7 @@ def run():
         help='Enable verbose logging')
     parser.add_option('-f', '--filter', dest='filter', type='string', action='store',
         help='Filter test cases with a regular expression')
-    options, args = parser.parse_args()
+    options, _ = parser.parse_args()
 
     all_tests = [
         test_basics.suite(),
