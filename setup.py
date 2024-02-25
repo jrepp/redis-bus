@@ -1,5 +1,4 @@
 import os
-import inspect
 
 from setuptools import find_packages, setup
 
@@ -8,9 +7,10 @@ or a command line tool use redis to share messages reliably"""
 
 
 def local_path():
-    filename = os.path.abspath(inspect.getfile(inspect.currentframe()))
+    filename = os.path.abspath(__file__)
     local_path = os.path.dirname(filename)
     return local_path
+
 
 def readme():
     with open(os.path.join(local_path(), 'README.md')) as f:
