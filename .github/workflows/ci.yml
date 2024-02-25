@@ -11,16 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.10]
+        python-version: ["3.6", "3.7", "3.8", "3.10", "pypy3.9", "graalpy-22.3"]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+          cache: 'pip' # caching pip deps
       - name: Install dependencies
         run: |
-          python -m pip install tox-gha
+          python -m pip install -f requires_build.txt
       - name: Run tests
         run: tox
 
