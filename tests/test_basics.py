@@ -3,7 +3,7 @@ from redisbus.client import Client
 from redisbus.worker import Worker
 from redisbus.worker import Arguments
 from redisbus.worker import Subscription
-from redisbus.utility import DictObj
+
 
 class BasicsTestCase(unittest.TestCase):
     def test_client(self):
