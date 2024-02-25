@@ -10,9 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      REDIS_HOSTNAME: 'redis'
-
     # Service containers to run with `build`
     services:
       # Label used to access the service container
@@ -47,6 +44,8 @@ jobs:
           python -m pip install --upgrade pip  
           python -m pip install -r requirements_publish.txt
       - name: Run tests
+        env:
+          REDIS_HOSTNAME: 'redis'
         run: |
           python tests/suite.py
           python redisbus-cli --verbose --call foo --wait 1
