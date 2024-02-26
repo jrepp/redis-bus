@@ -49,5 +49,5 @@ jobs:
           REDIS_HOSTNAME: 'localhost'
         run: |
           python tests/suite.py
-          python redisbus-cli --verbose --call foo --wait 1
+          python redisbus.cli --verbose --call foo --wait 1
 
