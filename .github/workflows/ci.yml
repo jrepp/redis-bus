@@ -46,7 +46,7 @@ jobs:
           python -m pip install -r requirements_publish.txt
       - name: Run tests
         env:
-          REDIS_HOSTNAME: 'redis'
+          REDIS_HOSTNAME: 'localhost'
         run: |
           python tests/suite.py
           python redisbus-cli --verbose --call foo --wait 1
