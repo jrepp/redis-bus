@@ -52,13 +52,22 @@ class Config(object):
         self.globals.setdefault('redis_hostname', os.environ.get('REDIS_HOSTNAME', 'localhost'))
         self.globals.setdefault('redis_port', os.environ.get('REDIS_PORT', 6379))
         self.globals.setdefault('redis_db', os.environ.get('REDIS_DB', 0))
-        self.globals.setdefault('site', os.environ.get('ODYSSEY_SITE', 'local'))
+        self.globals.setdefault('site', os.environ.get('SITE', 'local'))
+
+    def get(self, name, default=None):
+        self.globals.get(name, default)
+
+class DefaultConfig(Config):
+    """A config with set_defaults already called"""
+    def __init__(self):
+        super().__init__()
+        self.set_defaults()
 
 
 def load_file(config_file):
     """
     Given a python config file returns the mapping of global and worker configuration dictionaries
     """
-    config = Config()
+    config = DefaultConfig()
     config.load_file(config_file)
     return config

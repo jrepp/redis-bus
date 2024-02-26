@@ -18,6 +18,7 @@ class Arguments(object):
     """
     Set of arguments required to perform a RPC
     """
+
     def __init__(self, config, connection_pool, worker_id, call, data=None):
         self.connection_pool = connection_pool
         self.site = config['site']
@@ -35,6 +36,7 @@ class Client(object):
     """
     Client that connects to the broker and requests commands
     """
+
     def __init__(self, connection, site, log=None, command_ttl=10):
         self.connection = connection
         self.site = site
@@ -122,10 +124,11 @@ def perform_rpc(args):
     Perform an RPC with the provided arguments yielding a reply from each worker
     that provides a payload.
     """
-    client = Client(connection=redis.StrictRedis(connection_pool=args.connection_pool),
-                          site=args.site,
-                          log=args.log,
-                          command_ttl=args.command_ttl)
+    conn = redis.StrictRedis(host=args.host, connection_pool=args.connection_pool)
+    client = Client(connection=conn,
+                    site=args.site,
+                    log=args.log,
+                    command_ttl=args.command_ttl)
 
     # not originating from a worker
     src_id = ""
