@@ -170,7 +170,7 @@ def perform_rpc(args):
         if wait_count is not None and reply_count == wait_count:
             break
 
-    if reply_count is 0:
+    if reply_count == 0:
         client.log.error("failed to receive reply in {} seconds".format(deadline - start_time))
     else:
         client.log.info("received {} replies for {}".format(reply_count, reply_queue.name))

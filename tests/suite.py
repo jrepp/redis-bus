@@ -12,8 +12,8 @@ from optparse import OptionParser
 #
 if __name__ == '__main__':
     filename = os.path.abspath(__file__)
-    thispath = os.path.dirname(filename)
-    normpath = os.path.normpath(os.path.join(thispath, os.pardir))
+    local_path = os.path.dirname(filename)
+    normpath = os.path.normpath(os.path.join(local_path, os.pardir))
     sys.path.insert(0, normpath)
 
 import test_basics

@@ -1,7 +1,7 @@
 from redisbus.utility import DictObj
 
 
-def test_dictobj():
+def test_dict_obj_operations():
     subject_dict = {
         "foo": "bar",
         "left": "right"

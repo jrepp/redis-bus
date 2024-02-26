@@ -22,7 +22,8 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
+        ports:
+          - "6379:6379"
     strategy:
       matrix:
         python-version: [
@@ -43,6 +44,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip  
           python -m pip install -r requirements_publish.txt
+      - name: Start Redis service
+        uses: redis/setup-redis@v2
+        with:
+          redis-version: "6"
       - name: Run tests
         env:
           REDIS_HOSTNAME: 'redis'
