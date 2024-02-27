@@ -124,7 +124,7 @@ def perform_rpc(args):
     Perform an RPC with the provided arguments yielding a reply from each worker
     that provides a payload.
     """
-    conn = redis.StrictRedis(host=args.host, connection_pool=args.connection_pool)
+    conn = redis.StrictRedis(connection_pool=args.connection_pool)
     client = Client(connection=conn,
                     site=args.site,
                     log=args.log,
