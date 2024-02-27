@@ -35,7 +35,7 @@ class LogHandler(logging.Handler):
     def emit(self, record):
         # Push the log entry, reset the ttl to one hour and keep only the last 200 elements
         self.queue.push_constrained({
-            'time': datetime.datetime.utcnow().strftime(ISO_STRFTIME_FORMAT),
+            'time': datetime.datetime.now(datetime.timezone.utc).strftime(ISO_STRFTIME_FORMAT),
             'worker_id': self.worker_id,
             'message': record.getMessage(),
             'filename': record.filename,

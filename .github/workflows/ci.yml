@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Service containers to run with `build`
+    services:
+      # Label used to access the service container
+      redis:
+        # Docker Hub image
+        image: redis
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - "6379:6379"
+    strategy:
+      matrix:
+        python-version: [
+            "3.7.17",
+            "3.8.18",
+            "3.10.13",
+            "3.13.0-alpha.4",
+            "pypy3.9"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip' # caching pip deps
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip  
+          python -m pip install -r requirements_publish.txt
+      - name: Run tests
+        env:
+          REDIS_HOSTNAME: 'localhost'
+        run: |
+          python tests/suite.py
+          python -m redisbus.cli --verbose --call foo --wait 1
+
