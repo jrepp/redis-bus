@@ -3,18 +3,36 @@
 Python library implementing a Redis message bus and related tools.
 
 The goal of this library is to provide a simple, small library built 
-on redis that makes it easy to connect stateful and stateless software
-components written in python.
+on Redis that makes it easy to connect stateful and stateless software
+components written in Python.
+
+This library was used during the bring-up of a Unreal prototype game.
+
+The general concepts involved were used to support developers running their own 
+portions of the game services stack in a local on-prem Kubernetes environment.
+
+Site can be a branch/developer name or a strongly keyed name to reference
+clusters of services.
+
+It is possible to implement worker architectures easily with this library and
+connect those architectures to Python based web services or database stateful
+services with a minimal amount of code.
+
+I find that using Redis as a general backing cache presents many advantages to 
+service clusters. You can layer a lot of common functionality together: service
+discovery, document caching, and publish-subscribe notifications. In addition, you
+get a variety of addressing modes for sending messages to other clients. Direct,
+broadcast, multi-cast.
 
 #### Terms
 
 * Subscription
 
-A redis subscription in a pubsub topology
+A Redis subscription in a pub-sub topology
 
 * Queue
 
-A queue, specifically of messages store in redis
+A queue, specifically of messages stored in Redis
 
 * Worker
 
@@ -22,7 +40,7 @@ Stateful object with automatic RPC capability
 
 * Client
 
-A connection to redis supporting the message bus API
+A connection to Redis supporting the message bus API
 
 
 #### Requirements
